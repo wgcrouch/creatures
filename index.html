@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Creatures</title>
+        <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script-->
+		<script src="jquery.min.js"></script>
+		<script src="lib.js"></script>
+
+		<script>
+			var context;
+
+			$(document).ready(function() {
+				context = document.getElementById('field').getContext("2d");
+
+				var world = new World({
+					context: context,
+					number_of_creatures : 100
+				});
+
+
+				function update() {
+					world.update();
+				}
+
+			
+				$('#field').click(function(e){
+					var food = new Food();
+					food.position.x = e.offsetX;
+					food.position.y = e.offsetY;
+					world.addFood(food);
+					return false;
+				});
+
+				var interval = setInterval(update, 50);
+			});
+		</script>
+	</head>
+    <body>
+        <canvas id="field" width="400px" height="400px"></canvas>
+
+    </body>
+</html>
